@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Adventure</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #f7b733, #1a535c);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .game-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-top: 30px;
+        }
+        
+        h1 {
+            color: #ff6b6b;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .emoji {
+            font-size: 3rem;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        input {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 16px;
+            width: 70%;
+            margin: 10px 0;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        input:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+        }
+        
+        button {
+            background-color: #4ecdc4;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background-color: #ff6b6b;
+            transform: scale(1.05);
+        }
+        
+        #message {
+            margin: 20px 0;
+            font-size: 18px;
+            min-height: 50px;
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        #attempts {
+            font-weight: bold;
+            color: #4ecdc4;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 50%;
+            animation: confetti 5s ease-in-out infinite;
+        }
+        
+        @keyframes confetti {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(500px) rotate(720deg); opacity: 0; }
+        }
+
+        /* Difficulty selector */
+        .difficulty {
+            margin: 15px 0;
+        }
+        
+        .difficulty button {
+            padding: 8px 15px;
+            margin: 5px;
+            font-size: 14px;
+        }
+        
+        .difficulty .easy { background-color: #6bce70; }
+        .difficulty .medium { background-color: #f0ad4e; }
+        .difficulty .hard { background-color: #d9534f; }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Number Guessing Adventure</h1>
+        <div class="emoji">🔢🎮</div>
+        
+        <div class="difficulty">
+            <p>Choose difficulty:</p>
+            <button class="easy" onclick="setDifficulty(10)">Easy (1-10)</button>
+            <button class="medium" onclick="setDifficulty(50)">Medium (1-50)</button>
+            <button class="hard" onclick="setDifficulty(100)">Hard (1-100)</button>
+        </div>
+        
+        <p>I'm thinking of a number between 1 and <span id="maxNum">?</span>.</p>
+        <p>Can you guess it?</p>
+        
+        <div id="message">Select a difficulty to start!</div>
+        <p>Attempts: <span id="attempts">0</span></p>
+        
+        <input type="number" id="guessInput" placeholder="Enter your guess" disabled>
+        <div>
+            <button id="submitBtn" disabled>Submit Guess</button>
+            <button id="hintBtn" disabled>Get Hint</button>
+            <button id="newGameBtn">New Game</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
