@@ -30,6 +30,12 @@ function startGame() {
     attemptsEl.textContent = attempts;
     messageEl.textContent = `I'm thinking of a number between 1 and ${maxNumber}. Take a guess!`;
     guessInput.value = '';
+
+    // Enable input and buttons
+    guessInput.disabled = false;
+    submitBtn.disabled = false;
+    hintBtn.disabled = false;
+
     guessInput.focus();
     
     console.log(`The secret number is: ${randomNumber}`); // For debugging
@@ -136,3 +142,10 @@ guessInput.addEventListener('keypress', (e) => {
 
 // Start the first game when page loads
 startGame();
+
+function setDifficulty(maxNumber) {
+    document.getElementById('maxNum').textContent = maxNumber;
+    document.getElementById('guessInput').disabled = false;
+    document.getElementById('submitBtn').disabled = false;
+    document.getElementById('message').textContent = `I'm thinking of a number between 1 and ${maxNumber}. Start guessing!`;
+}
